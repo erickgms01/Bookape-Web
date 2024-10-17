@@ -24,7 +24,7 @@ const bookSchema = new mongoose.Schema({
         required: true,
     },
     cover: {
-        type: String, // Aqui, você pode armazenar a URL da imagem
+        type: String, 
         required: true,
     },
     description: {

@@ -1,33 +1,32 @@
-var express = require('express');
-var router = express.Router();
+// routes/bookDetails.js
+const express = require('express');
+const Book = require('../models/Book'); // Verifique se o caminho está correto
+const router = express.Router();
 
-const { format } = require('date-fns'); 
+router.get('/', (req, res) => {
+  res.render('bookDetails');
+} );
 
-// Função para formatar a data de publicação
-function formatPublishDate(publishDate) {
-    const date = new Date(publishDate);
-    return format(date, 'MMM dd, yyyy'); // Formato desejado: "Jan 24, 2024"
-}
-
-/* GET detalhes do livro pelo título */
-router.get('/:title', async (req, res, next) => {
-  const db = req.app.locals.db; // Acessa o banco de dados conectado
-  const bookTitle = req.params.title;
-
+// Rota para obter detalhes do livro
+router.get('/:title', async (req, res) => {
   try {
-    // Busca o livro pelo título, ignorando maiúsculas/minúsculas
-    const book = await db.collection('books').findOne({ title: { $regex: new RegExp(`^${bookTitle}$`, 'i') } });
-    const formattedDate = formatPublishDate(book.publishDate);
+      const bookTitle = req.params.title; // Pega o título do livro da URL
+      const book = await Book.findOne({ title: bookTitle }); // Busca o livro pelo título
 
-    if (book) {
-      res.render('bookDetails', { book, formattedDate }); // Renderiza a página com os detalhes do livro
-    } else {
-      res.status(404).send('Livro não encontrado');
-    }
+      if (!book) {
+          return res.status(404).send('Livro não encontrado');
+      }
+
+      // Formatar a data para exibição
+      const formattedDate = book.publishDate.toLocaleDateString('pt-BR');
+
+      // Renderiza a página com os dados do livro
+      res.render('bookDetails', { book, formattedDate });
   } catch (error) {
-    console.error('Erro ao buscar o livro:', error);
-    res.status(500).json({ error: 'Erro ao buscar o livro' });
+      console.error(error);
+      res.status(500).send('Erro ao buscar o livro');
   }
 });
+
 
 module.exports = router;

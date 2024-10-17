@@ -21,6 +21,7 @@ const upload = multer({ storage: storage });
 router.get('/', (req, res) => {
     res.render('addNewBook');
 });
+
 router.post('/', upload.single('book_cover'), async (req, res) => {
     try {
         const { book_title, book_autor, book_publish_date, book_pages, book_gender, book_description } = req.body;
@@ -38,7 +39,9 @@ router.post('/', upload.single('book_cover'), async (req, res) => {
 
         // Salva o livro no banco de dados
         await newBook.save();
-        res.status(201).redirect('/'); // Redireciona para a página inicial após a adição
+
+        
+        res.redirect(`/bookDetails/${encodeURIComponent(newBook.title)}`); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Erro ao adicionar o livro.');

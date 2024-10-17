@@ -13,11 +13,10 @@
         <section class="section-book-details">
             <div id="book-details">
                 <section class="livro">
-                    <img class="capa" src="data:image/jpeg;base64,<%= book.cover %>" alt="<%= book.title %>">
+                    <img class="capa" src="/<%= book.cover %>" alt="<%= book.title %>">
                     <h2><%= book.title %></h2>
                     <p><%= book.author || 'Desconhecido' %> </p>
                     <p>Data de publicação: <%= formattedDate || 'Desconhecida' %></p>
-                    <!-- button>Adicionar Comentário</button> -->
                 </section>
             </div>
 
@@ -31,7 +30,7 @@
                     <p>Páginas</p>
                 </section>
                 <section class="secao">
-                    <h2> <%= book.gender || 'Desconhecido' %> </h2>
+                    <h2> <%= book.genre || 'Desconhecido' %> </h2>
                     <p>Gênero</p>
                 </section>
                 <section class="secao">

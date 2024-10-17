@@ -7,7 +7,7 @@ var mongoose = require('mongoose'); // Adicionando mongoose para conexão
 
 const { Book } = require('./models/Book'); // Atualizado para corresponder ao modelo
 
-const uri = "mongodb+srv://thalitasuzyr:thalitasuzyr@clustersuzy.p8ib9.mongodb.net/databasetest";
+const uri = "mongodb+srv://thalitasuzyr:thalitasuzyr@clustersuzy.p8ib9.mongodb.net/database";
 
 const app = express();
 
