@@ -1,0 +1,148 @@
+/* Basic styles */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+ 
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  
+}
+
+h2{
+  /* color: #E06951; */
+  padding-bottom:18px;
+  padding-top:18px;
+}
+
+p{
+  padding-bottom:18px;
+}
+
+main {
+  padding: 40px;
+  text-align: center;
+  
+}
+
+.search-bar {
+  display: flex;
+  margin-bottom: 20px;
+  padding-left:40px;
+  padding-right:40px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.search-bar button {
+  padding: 10px 20px; 
+  background-color: #E06951;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.carousel {
+  width: 100%; 
+  height: 220px; 
+  padding-top: 20px;
+  overflow: hidden; /* Esconde labels que ultrapassam a área visível */
+  display: flex; /* Permite que os labels sejam organizados em linha */
+}
+
+.label {
+  flex: 1; /* Distribui o espaço uniformemente entre os labels */
+  text-align: center; /* Centraliza o texto dentro dos labels */
+  padding: 10px; /* Adiciona espaço interno aos labels */
+  border: 1px solid #ccc; /* Borda para separar os labels */
+  border-radius: 10px; /* Arredonda as bordas dos labels */
+  margin-right: 10px; /* Espaçamento entre os labels */
+  background-color: #f0f0f0; /* Cor de fundo dos labels */
+}
+
+.label.active {
+  background-color: #e0e0e0; /* Cor de fundo do label ativo */
+  cursor: pointer; /* Cursor de mão ao passar o mouse sobre o label */
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que as seções fiquem lado a lado */
+    justify-content: space-around; /* Distribui as seções com espaço entre elas */
+    width: 80%; /* Ajuste a largura do container se necessário */
+    margin: 20px auto; /* Centraliza o container na página */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.secao {
+    flex: 1; /* Distribui o espaço uniformemente entre as seções */
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px; /* Espaçamento entre as seções */
+    background-color: #f8f8f8;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: 20px auto; /* Centraliza o container na página */
+  background-color: #eee;
+  margin-top:40px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 20px;
+  background-color: #4CAF50; /* Cor da barra de progresso */
+  transition: width 0.5s ease;
+}
+
+.percentage {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.quotes-container {
+  display: flex; /* Permite que as citações sejam dispostas em colunas */
+  flex-wrap: wrap; /* Permite que as citações se quebrem em várias linhas */
+  justify-content: space-between; /* Distribui as citações com espaço entre elas */
+}
+
+.quote {
+  width: 49%; /* Ajuste a largura das citações conforme necessário */
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+}
+
+.quote p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.quote .author {
+  font-style: italic;
+  color: #666;
+}
+
+

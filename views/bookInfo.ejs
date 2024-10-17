@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+   <%- include('./partials/header') %>
+<body>
+  <main>
+      
+      <section class="livro">
+          <img class="capa" src="img/pequenoPrincipe.webp" alt="Capa do Livro">
+          <h2>O Pequeno Princípe</h2>
+          <p>Autor: Antoine de Saint-Exupéry </p>
+          <button>Adicionar Comentário</button>
+      </section>
+      
+      <div class="container">
+          <section class="secao">
+              <h2>4.5</h2> <!-- Será Editavel -->
+              <p>Avaliação</p>
+          </section>
+          <section class="secao">
+              <h2>96</h2> <!-- Será Editavel / API-->
+              <p>Páginas</p>
+          </section>
+          <section class="secao">
+              <h2>Infantil</h2> <!-- Será Editavel / API -->
+              <p>Gênero</p>
+          </section>
+          <section class="secao">
+                <h2>Lendo</h2> <!-- Será Editavel / API -->
+                <p>Status</p>
+            </section>
+      </div>
+
+      <div class="container">
+      <h2>Descrição</h2>
+      <p id="bookDescription">Nesta história que marcou gerações de leitores em todo o mundo, um piloto cai com seu avião no deserto do Saara e encontra um pequeno príncipe, que o leva a uma aventura filosófica e poética através de planetas que encerram a solidão humana. <br><br>
+    
+      Um livro para todos os públicos, O pequeno príncipe é uma obra atemporal, com metáforas pertinentes e aprendizados sobre afeto, sonhos, esperança e tudo aquilo que é invisível aos olhos. </p>
+      </div>
+
+      <div class="container">
+        <h2>Capítulo X</h2>
+        <p id="pagesCount">Página 20 de 96</p>
+        <div class="progress-bar">
+            <div class="progress"></div>
+            <span class="percentage">20%</span>
+        </div>
+      </div>
+
+      <div class="container">
+          <h2>Citações e Comentários</h2>
+          <div class="quotes-container">
+              </div>
+      </div>
+
+      <!-- <div class="container">
+            <h2>Galeria</h2>
+            <div class="images-container">
+                </div> -->
+
+  </main>
+
+  <footer>
+     <%- include('./partials/footer') %>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+      const progressBar = document.querySelector('.progress');
+      const percentageSpan = document.querySelector('.percentage');
+
+      // Função para atualizar a barra de progresso
+      function updateProgress(readPages, totalPages) {
+          const percentage = (readPages / totalPages) * 100;
+          progressBar.style.width = `${percentage}%`;
+          percentageSpan.textContent = `${percentage.toFixed(1)}%`;
+      }
+
+      // Exemplo de uso: assuming you have a variable 'totalPages' and 'readPages'
+      updateProgress(20, 96); // Indica que 20 de 96 páginas foram lidas (20.8%)
+
+      const quotesContainer = document.querySelector('.quotes-container');
+
+      // Função para criar e adicionar uma citação ao container
+      function createQuote(quoteText, author) {
+          const quoteElement = document.createElement('div');
+          quoteElement.classList.add('quote');
+
+          const quoteParagraph = document.createElement('p');
+          quoteParagraph.textContent = quoteText;
+
+          const authorElement = document.createElement('span');
+          authorElement.classList.add('author');
+          authorElement.textContent = `- ${author}`;
+
+          quoteElement.appendChild(quoteParagraph);
+          quoteElement.appendChild(authorElement);
+
+          quotesContainer.appendChild(quoteElement);
+      }
+
+      // Exemplo de uso: Adicione suas citações aqui
+      createQuote('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'John Doe');
+      createQuote('Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Jane Doe');
+      createQuote('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'John Doe');
+       createQuote('Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Jane Doe');
+
+  </script>
+</body>
+</html>
+
+
+<!-- Essa versão considera que o usuário está lendo o livro, caso o status seja não lido / ler, as sessões progresso, comentários e quotes, imagens estão escondidas -->

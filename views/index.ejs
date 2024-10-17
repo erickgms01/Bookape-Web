@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/stylesheets/index.css" rel="stylesheet"/> 
+    <script src="/javascripts/sendEmail.js"></script>
+    <title>Bookapê - Início</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+        
+<body>
+     <%- include('./partials/header') %>
+
+    <main>
+        <section id="section-hero">
+             <div class="container hero-container">
+                 <div class="hero-content">
+                     <h1 class="hero-title">Bem-Vindo ao Bookapê!</h1>
+                     <p class="hero-subtitle">Muito mais do que apenas um site de livros, o bookapê é o seu mais novo companheiro de leitura e journal de livros virtual!</p>
+                     <a href="/signIn" class="principal-button">Ir para Login</a>
+                      <a href="http://127.0.0.1:3000/#:~:text=Como%20Funciona%3F-,O%20que%20%C3%A9%20o%20Bookap%C3%AA%3F,-O%20Bookape%20%C3%A9&text=Como%20Funciona%3F-,O%20que%20%C3%A9%20o%20Bookap%C3%AA%3F,-O%20Bookape%20%C3%A9&text=Como%20Funciona%3F-,O%20que%20%C3%A9%20o%20Bookap%C3%AA%3F,-O%20Bookape%20%C3%A9"class="secundary-button">Como Funciona?</a>
+                 </div>
+                  <img src="img/coffeAndBooks.png" alt="coffeAndBooks" class="hero-image"> 
+             </div>
+         </section>
+
+        <section id="section-project">
+             <h2 class="project-title">O que é o Bookapê?</h2>
+             <div class="container project-container">
+
+             <img height="500px" src="/img/bookshelf.png" alt="bookshelf" class="project-image">
+
+             <p class="project-description"> O <strong>Bookape</strong> é uma plataforma que revoluciona a forma como <strong>lemos e interagimos com os livros.</strong> Além de servir como uma biblioteca virtual completa, o Bookape oferece diversas ferramentas para enriquecer sua <strong>experiência de leitura!</strong> </br> </br>
+             O Bookape é a ferramenta ideal para quem busca uma <strong>experiência de leitura mais completa e personalizada.</strong></p>
+             </div>
+         </section>
+
+        <section id="section-features">
+               <div class="container">
+                   <h2 class="features-title">Com o bookapê você pode</h2>
+                   <p class="features-subtitle">Estas são algumas das ferramentas que o Bookapê tem para enriquecer sua experiência</p>
+                   <div class="features-row">
+                       <div class="feature">
+                           <img src="img/smallBookshelf.png" alt="samllbookshelf" class="feature-image">
+                           <h3 class="feature-title">Armazenar seus livros</h3>
+                           <p class="feature-subtitle">Adicione todos os livros que você já leu ou deseja ler à sua estante virtual.</p>
+                       </div>
+                       <div class="feature">
+                            <img src="img/highlighter.png" alt="highlighter" class="feature-image">
+                           <h3 class="feature-title">Marcar páginas e criar quotes</h3>
+                           <p class="feature-subtitle"> Destaque trechos importantes e anote suas reflexões sobre cada livro.</p>
+                       </div>
+                       <div class="feature">
+                            <img src="img/threebooks.png" alt="threebooks" class="feature-image">
+                           <h3 class="feature-title">Organizar sua leitura</h3>
+                           <p class="feature-subtitle"> Crie listas de leitura, categorize seus livros por gênero, autor ou qualquer outro critério que desejar.</p>
+                       </div>
+                   </div>
+               </div>
+           </section>
+
+        <section id="section-call">
+             <img height="500px" src="img/menWithBooks.png" alt="manWithBooks" class="call-image">
+            <div class="container">
+                <h2 class="call-title">Vamos conversar?</h2>
+                <p class="call-description">Preencha o formulário abaixo para entrar em contato</p>
+                <form id="call-form" action="#">
+                    <div class="form-field">
+                        <label for="nome" ></label>
+                        <input type="text" id="nome" name="nome" placeholder="DIGITE SEU NOME COMPLETO" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="email"></label>
+                        <input type="email" id="email" name="email" placeholder="DIGITE SEU EMAIL" required>
+                    </div>
+                    <button id="submit-buttom" type="submit">Enviar</button>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <%- include('./partials/footer') %>
+    </footer>
+
+    
+</body>
+</html>

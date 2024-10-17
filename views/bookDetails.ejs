@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Livro</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bookDetails.css">
+</head>
+    <%- include('./partials/headerUsers') %>
+<body>
+    <main>
+        <section class="section-book-details">
+            <div id="book-details">
+                <section class="livro">
+                    <img class="capa" src="data:image/jpeg;base64,<%= book.cover %>" alt="<%= book.title %>">
+                    <h2><%= book.title %></h2>
+                    <p><%= book.author || 'Desconhecido' %> </p>
+                    <p>Data de publicação: <%= formattedDate || 'Desconhecida' %></p>
+                    <!-- button>Adicionar Comentário</button> -->
+                </section>
+            </div>
+
+            <div class="container">
+                <section class="secao">
+                    <h2>4.5</h2> <!-- Valor fixo ou poderá ser editável -->
+                    <p>Avaliação</p>
+                </section>
+                <section class="secao">
+                    <h2> <%= book.pages || 'Desconhecido' %> </h2>
+                    <p>Páginas</p>
+                </section>
+                <section class="secao">
+                    <h2> <%= book.gender || 'Desconhecido' %> </h2>
+                    <p>Gênero</p>
+                </section>
+                <section class="secao">
+                    <h2>Lendo</h2> <!-- Poderá ser editável -->
+                    <p>Status</p>
+                </section>
+            </div>
+
+            <div class="container">
+                <h2>Descrição</h2>
+                <p id="bookDescription"><%= book.description || 'Sem descrição disponível' %></p>
+            </div>
+
+            <!--<div class="container">
+                <h2>Capítulo X</h2>
+                <p id="pagesCount">Página 20 de <%= book.totalPages || '96' %></p>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                    <span class="percentage">20%</span>
+                </div>
+            </div>
+
+            <div class="container">
+                <h2>Citações e Comentários</h2>
+                <div class="quotes-container">
+                    Adicionar seções de citações ou comentários aqui 
+                </div>
+            </div> -->
+        </section>
+    </main>
+
+    <script src="javascripts/bookDetails.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Livro</title>
+    <link rel="stylesheet" href="/stylesheets/style.css"> 
+    <link rel="stylesheet" href="/stylesheets/addNewBook.css">
+</head>
+    <%- include('./partials/headerUsers') %>
+<body>
+        <section class="section-book-details">
+            <h1 class="title">Adicionar novo livro ao Meu Bookapê</h1>
+            <p class="description">Preencha todo os campos para adicionar um novo livro a sua estante!</p>
+
+            <div class="container">
+                <h1>   </h1>
+                <img id="book_cover_preview" class="book_cover" src="" alt="Preview da capa do livro" style="display: none;"/>
+            
+                <form id="book-form" action="/addNewBook" method="POST" enctype="multipart/form-data">
+                    <div class="form-field">
+                        <label for="book_title">Título</label>
+                        <input type="text" id="book_title" name="book_title" placeholder="Digite o título do livro" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="book_autor">Autor</label>
+                        <input type="text" id="book_autor" name="book_autor" placeholder="Digite o nome do autor" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="book_publish_date">Data de publicação</label>
+                        <input type="date" id="book_publish_date" name="book_publish_date" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="book_pages">Páginas</label>
+                        <input type="number" id="book_pages" name="book_pages" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="book_gender">Gênero</label>
+                        <input type="text" id="book_gender" name="book_gender" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="book_cover">Capa do Livro</label>
+                        <input type="file" id="book_cover_input" name="book_cover" accept="image/*" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="book_description">Descrição</label>
+                        <textarea id="book_description" name="book_description" required></textarea>
+                    </div>
+                    <button type="submit" id="submit-button">Adicionar Livro</button>
+                </form>
+                
+            </div>
+        </section>
+
+    <script>
+        const input = document.getElementById('book_cover_input');
+        const imgPreview = document.getElementById('book_cover_preview');
+
+        input.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imgPreview.src = e.target.result; 
+                    imgPreview.style.display = 'block'; 
+                }
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+    
+</body>
+</html>
