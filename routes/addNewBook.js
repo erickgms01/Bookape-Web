@@ -1,8 +1,7 @@
-// routes/addNewBook.js
-const express = require('express');
-const multer = require('multer');
-const Book = require('../models/Book');
-const path = require('path');
+import express from 'express';
+import multer from 'multer';
+import Book from '../models/Book.js';
+import path from 'path';
 
 const router = express.Router();
 
@@ -40,7 +39,7 @@ router.post('/', upload.single('book_cover'), async (req, res) => {
         // Salva o livro no banco de dados
         await newBook.save();
 
-        
+        // Redireciona para a página de detalhes do livro
         res.redirect(`/bookDetails/${encodeURIComponent(newBook.title)}`); 
     } catch (error) {
         console.error(error);
@@ -48,4 +47,4 @@ router.post('/', upload.single('book_cover'), async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

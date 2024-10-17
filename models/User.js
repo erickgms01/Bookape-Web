@@ -1,17 +1,25 @@
-const bcrypt = require('bcrypt');
+// models/User.js
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
+const userSchema = new mongoose.Schema({
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+});
+
+const UserModel = mongoose.model('User', userSchema);
 
 class User {
-    static async create(db, email, password) {
+    static async create(email, password) {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = { email, password: hashedPassword };
-        await db.collection('users').insertOne(user);
-        return user;
+        const user = new UserModel({ email, password: hashedPassword });
+        await user.save(); // Salva o usuário no MongoDB
+        return user; // Retorna o usuário criado
     }
 
-    static async findByEmail(db, email) {
-        return await db.collection('users').findOne({ email: email });
+    static async findByEmail(email) {
+        return await UserModel.findOne({ email });
     }
 }
 
-module.exports = User;
+export default User;

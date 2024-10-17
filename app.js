@@ -1,46 +1,46 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var createError = require('http-errors');
-var mongoose = require('mongoose'); // Adicionando mongoose para conexão
-
-const { Book } = require('./models/Book'); // Atualizado para corresponder ao modelo
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import createError from 'http-errors';
+import mongoose from 'mongoose';
+import Book from './models/Book.js';
 
 const uri = "mongodb+srv://thalitasuzyr:thalitasuzyr@clustersuzy.p8ib9.mongodb.net/database";
 
 const app = express();
 
-// Conexão com o MongoDB usando Mongoose
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
+// Conexão com o banco de dados
+(async () => {
+  try {
+    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log("Conectado ao MongoDB Atlas!😎");
-  })
-  .catch((err) => {
-    console.log("Erro ao conectar ao MongoDB Atlas!😔", err);
-  });
+  } catch (err) {
+    console.error("Erro ao conectar ao MongoDB Atlas!😔", err);
+  }
+})();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(path.resolve(), 'views')); // path.resolve() para ES modules
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Para servir arquivos de upload
+app.use(express.static(path.join(path.resolve(), 'public')));
+app.use('/uploads', express.static(path.join(path.resolve(), 'uploads'))); // Para servir arquivos de upload
 
-// Importação das rotas
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var signInRouter = require('./routes/signIn');
-var signUpRouter = require('./routes/signUp');
-var bookInfoRouter = require('./routes/bookInfo');
-var bookDetailsRouter = require('./routes/bookDetails');
-var magicRouter = require('./routes/magic');
-var searchBooksRouter = require('./routes/searchBooks');
-var addNewBookRouter = require('./routes/addNewBook');
+// Importação das rotas (agora com ES modules)
+import indexRouter from './routes/index.js';
+import usersRouter from './routes/users.js';
+import signInRouter from './routes/signIn.js';
+import signUpRouter from './routes/signUp.js';
+import bookInfoRouter from './routes/bookInfo.js';
+import bookDetailsRouter from './routes/bookDetails.js';
+import magicRouter from './routes/magic.js';
+import searchBooksRouter from './routes/searchBooks.js';
+import addNewBookRouter from './routes/addNewBook.js';
 
 // Definição das rotas
 app.use('/', indexRouter);
@@ -50,16 +50,16 @@ app.use('/signUp', signUpRouter);
 app.use('/bookInfo', bookInfoRouter);
 app.use('/magic', magicRouter);
 app.use('/searchBooks', searchBooksRouter);
-app.use('/bookDetails', bookDetailsRouter); // Rota de detalhes do livro
-app.use('/addNewBook', addNewBookRouter); // Rota para adicionar novos livros
+app.use('/bookDetails', bookDetailsRouter);
+app.use('/addNewBook', addNewBookRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
@@ -67,4 +67,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+export default app;

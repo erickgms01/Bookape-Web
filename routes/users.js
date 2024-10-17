@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  var characters =[
+
+router.get('/', (req, res, next) => {
+  const characters = [
     {
       name: 'Harry',
       role: 'Student'
@@ -21,9 +21,9 @@ router.get('/', function(req, res, next) {
       role: 'Student'
     }
   ];
-  var subheading = "I though we should involve some magic";
+  const subheading = "I thought we should involve some magic";
 
-  res.render('users', {characters: characters, subheading: subheading});
+  res.render('users', { characters, subheading });
 });
 
-module.exports = router;
+export default router;
