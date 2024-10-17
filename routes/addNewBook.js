@@ -1,48 +1,44 @@
+// routes/addNewBook.js
 const express = require('express');
-const router = express.Router();
-const { BookModel } = require('../models/Book');
 const multer = require('multer');
+const Book = require('../models/Book');
 const path = require('path');
 
+const router = express.Router();
 
-// Configuração do Multer para fazer upload da imagem
+// Configuração do multer para upload de arquivos
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, 'public/uploads/'); // Define o diretório de destino
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // Diretório onde os arquivos serão armazenados
     },
-    filename: function(req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname)); // Define o nome do arquivo
-    }
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Renomeia o arquivo para evitar conflitos
+    },
 });
 
 const upload = multer({ storage: storage });
 
-// Rota GET para exibir o formulário de adicionar livro
 router.get('/', (req, res) => {
-    res.render('addNewBook'); 
+    res.render('addNewBook');
 });
-
-// Rota POST com upload da imagem
 router.post('/', upload.single('book_cover'), async (req, res) => {
     try {
         const { book_title, book_autor, book_publish_date, book_pages, book_gender, book_description } = req.body;
 
-        // Cria o objeto de dados do livro
-        const newBook = {
+        // Cria uma nova instância do modelo Book
+        const newBook = new Book({
             title: book_title,
             author: book_autor,
-            publishDate: new Date(book_publish_date),
+            publishDate: book_publish_date,
             pages: book_pages,
-            gender: book_gender,
+            genre: book_gender,
+            cover: req.file.path, // Armazena o caminho do arquivo
             description: book_description,
-            cover: req.file ? `/uploads/${req.file.filename}` : '' // Caminho da capa do livro
-        };
+        });
 
-        // Salva no banco de dados
-        await BookModel.createBook(newBook);
-
-        // Redireciona ou envia uma resposta de sucesso
-        res.redirect('/bookDetails'); 
+        // Salva o livro no banco de dados
+        await newBook.save();
+        res.status(201).redirect('/'); // Redireciona para a página inicial após a adição
     } catch (error) {
         console.error(error);
         res.status(500).send('Erro ao adicionar o livro.');
